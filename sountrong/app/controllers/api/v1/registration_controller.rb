@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
+# RegistrationController
 class Api::V1::RegistrationController < ApplicationController
+  before_action :authorized, only: ['update']
   def create
     @user = User.new user_params
 
@@ -13,6 +17,20 @@ class Api::V1::RegistrationController < ApplicationController
       render json: { message: 'Успешно зарегистрировались' }, status: :ok
     else
       render json: { error: "Ошибка регистриации пользователя, errors: #{@user.errors.full_messages}" }, status: :bad_request
+    end
+  end
+
+  def update
+    @user = User.find_by(username: params[:username])
+    return render json: { error: 'Не найден пользователь' }, status: :bad_request if @user.blank?
+
+    @current_user.attributes = user_params
+    @current_user.skip_password = true
+
+    if @current_user.save
+      render json: { message: 'Профиль пользователя обновлен' }, status: :ok
+    else
+      render json: { error: "Ошибка при обновлении пользователя, errors: #{@user.errors.full_messages}" }, status: :bad_request
     end
   end
 

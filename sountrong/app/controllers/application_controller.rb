@@ -6,7 +6,7 @@ class ApplicationController < ActionController::API
   def decoded_token
     if auth_header_request
       begin
-        info_from_token = Authorize::WebToken.decode auth_header_request.split(' ')[1]
+        Authorize::WebToken.decode auth_header_request.split(' ')[1]
       rescue JWT::DecodeError
         nil
       end
