@@ -12,7 +12,6 @@ class User < ApplicationRecord
   validates :username, uniqueness: true, presence: true, length: { maximum: 50 }
   validates :password, length: { in: 6..20 }, unless: :skip_password
 
-
   def full_name
     "#{first_name} #{last_name}"
   end
