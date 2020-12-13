@@ -8,6 +8,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -21,6 +22,10 @@ const useStyles = makeStyles((theme) => ({
   },
   boxCenter: {
     display: 'flex'
+  },
+  decorationNavLink: {
+    textDecoration: 'none',
+    color: '#ffffff'
   }
 }));
 
@@ -62,8 +67,12 @@ export const Login = () => {
               color="primary"
               aria-label="large outlined primary button group"
             >
-              <Button>Войти</Button>
-              <Button>Зарегистрироваться</Button>
+              <Button>
+                Войти
+              </Button>
+              <Button>
+                <NavLink to={'/signup'} className={classes.decorationNavLink}>Зарегистрироваться</NavLink>
+              </Button>
             </ButtonGroup>
           </Grid>
         </CardContent>
