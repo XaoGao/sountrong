@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Navbar = () => {
+export const Navbar = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.root}>
@@ -28,7 +28,7 @@ export const Navbar = () => {
             <Typography variant="h5" className={classes.title}>
               Sountrong
             </Typography>
-            <Button color="inherit">Войти</Button>
+            <Button color="inherit">Войти - {props.username}</Button>
           </Toolbar>
         </Container>
       </AppBar>

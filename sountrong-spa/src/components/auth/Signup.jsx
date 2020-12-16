@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
@@ -32,7 +32,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const Signup = () => {
+export const Signup = (props) => {
+  const[username, setUsername] = useState("");
+  const[password, setPassword] = useState("");
+  const[firstName, setFirstName] = useState("");
+  const[lastName, setLastName] = useState("");
+
   const classes = useStyles();
   return (
     <Box margin="auto" width={700}>
@@ -49,6 +54,8 @@ export const Signup = () => {
               fullWidth={true}
               size="medium"
               className={`${classes.margin}`}
+              value = {username}
+              onChange = {e => setUsername(e.target.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -66,6 +73,8 @@ export const Signup = () => {
                   fullWidth={true}
                   size="medium"
                   className={`${classes.margin}`}
+                  value = {firstName}
+                  onChange = {e => setFirstName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={6}>
@@ -76,6 +85,8 @@ export const Signup = () => {
                   fullWidth={true}
                   size="medium"
                   className={`${classes.margin}`}
+                  value = {lastName}
+                  onChange = {e => setLastName(e.target.value)}
                 />
               </Grid>
             </Grid>
@@ -86,6 +97,8 @@ export const Signup = () => {
               fullWidth={true}
               size="medium"
               className={classes.margin}
+              value = {password}
+              onChange = {e => setPassword(e.target.value)}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -108,7 +121,7 @@ export const Signup = () => {
                   Войти в существующую учетку
                 </NavLink>
               </Button>
-              <Button>
+              <Button onClick={() => props.signup(username, firstName, lastName, password)}>
                   Зарегистрироваться
               </Button>
             </ButtonGroup>

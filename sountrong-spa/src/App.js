@@ -1,18 +1,18 @@
 import "./App.css";
 import { Route } from "react-router-dom";
-import Navbar from "./components/navbar/Navbar";
+import NavbarContainer from "./components/navbar/NavbarContainer";
 import Container from "@material-ui/core/Container";
-import Login from "./components/auth/Login";
-import Signup from "./components/auth/Signup";
+import LoginContainer from "./components/auth/LoginContainer";
+import SignupContainer from "./components/auth/SignupContainer";
 
 
 function App() {
   return (    
     <div className="App">
-      <Navbar />
+      <NavbarContainer />
       <Container>
-        <Route exact path="/" render={() => <Login />} />
-        <Route exact path="/signup" render={() => <Signup />} />
+        <Route exact path="/" render={() => <LoginContainer />} />
+        <Route exact path="/signup" render={() => <SignupContainer />} />
       </Container>
     </div>  
   );

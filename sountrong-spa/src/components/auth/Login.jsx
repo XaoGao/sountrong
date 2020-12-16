@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import Card from "@material-ui/core/Card";
 import { makeStyles } from "@material-ui/core/styles";
@@ -29,7 +29,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export const Login = () => {
+export const Login = (props) => {
+  const[username, setUsername] = useState("");
+  const[password, setPassword] = useState("");
+
   const classes = useStyles();
   return (
     <Box
@@ -39,7 +42,7 @@ export const Login = () => {
       <Card className={classes.marginTopForCard}>
         <CardContent>
           <form noValidate autoComplete="off">
-            <Typography variant="h4" align="center">
+            <Typography variant="h4" align="center">         
               Войти
             </Typography>
             <TextField
@@ -49,6 +52,8 @@ export const Login = () => {
               fullWidth={true}
               size="medium"
               className={`${classes.margin} ${classes.marginTopForField}`}
+              value = {username}
+              onChange = {e => setUsername(e.target.value)}
             />
             <TextField
               id="password-basic"
@@ -57,6 +62,8 @@ export const Login = () => {
               fullWidth={true}
               size="medium"
               className={classes.margin}
+              value = {password}
+              onChange = {e => setPassword(e.target.value)}
             />
           </form>
           <hr />
@@ -67,7 +74,9 @@ export const Login = () => {
               color="primary"
               aria-label="large outlined primary button group"
             >
-              <Button>
+              <Button
+                onClick = {() => props.login(username, password)}
+              >
                 Войти
               </Button>
               <Button>
