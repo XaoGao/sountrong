@@ -4,7 +4,7 @@ class Api::V1::SessionController < ApplicationController
     render json: { error: 'Не найден пользователь с указаным username' }, status: :bad_request if user.blank?
 
     if user.authenticate(params[:password])
-      payload = { user_id: user.id, role: user.role.name }
+      payload = { user_id: user.id, username: user.username, role: user.role.name }
       token = Authorize::WebToken.encode payload
       render json: { token: token }, status: :ok
     else
