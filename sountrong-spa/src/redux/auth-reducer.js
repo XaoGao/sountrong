@@ -36,10 +36,20 @@ export const login = (username, password) => async (dispatch) => {
 export const signup = (username, firstName, lastName, password) => async (
   dispatch
 ) => {
-  console.log(
-    `username = ${username}; fisrtName = ${firstName}; lastName = ${lastName}; password = ${password}`
-  );
+  return await authApi.signup(username, firstName, lastName, password).then((response) => {
+    if (response.status === 200) {
+      login(username, password);
+    }
+  })
 };
+
+export const logout = () => async (dispatch) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    localStorage.removeItem("token");
+    dispatch(setAuthUserData(null, null, false));
+  }
+}
 
 export const setAuthUserData = (userId, username, isAuth) => ({
   type: SET_USER_DATA, payload: { userId, username, isAuth }

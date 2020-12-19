@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import Navbar from "./Navbar";
+import { logout } from "../../redux/auth-reducer";
 
 let mapStateToProps = (state) => {
   return {
@@ -7,4 +8,4 @@ let mapStateToProps = (state) => {
     username: state.auth.username,
   };
 };
-export default connect(mapStateToProps, {})(Navbar);
+export default connect(mapStateToProps, {logout})(Navbar);
