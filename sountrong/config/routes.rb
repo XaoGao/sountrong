@@ -4,6 +4,8 @@ Rails.application.routes.draw do
       post 'signin', to: 'session#create'
       post 'signup', to: 'registration#create'
       put 'edit_profile', to: 'registration#update'
+
+      resources :singers, except: %w[new edit]
     end
   end
 end
