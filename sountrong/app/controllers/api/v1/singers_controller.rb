@@ -1,4 +1,7 @@
-class Api::V1::SingersController < ApplicationController
+# frozen_string_literal: true
+
+# SingersController
+class Api::V1::SingersController < Api::BaseController
   before_action :authorized, only: %w[create update destroy]
 
   def index
@@ -11,7 +14,7 @@ class Api::V1::SingersController < ApplicationController
     if @singer.present?
       render json: { singer: SingerSerializer.new(@singer) }, status: :ok
     else
-      render json: { error: 'Не найдена группа' }, status: :bad_request
+      render_bad_request 'Не найдена группа'
     end
   end
 
@@ -20,7 +23,7 @@ class Api::V1::SingersController < ApplicationController
     if @singer.save
       render json: { singer: SingerSerializer.new(@singer) }, status: :ok
     else
-      render json: { error: 'Ошибка во время сохранения группы' }, status: :bad_request
+      render_bad_request 'Ошибка во время сохранения группы'
     end
   end
 
@@ -29,16 +32,16 @@ class Api::V1::SingersController < ApplicationController
     if @singer.update singer_params
       render json: { singer: SingerSerializer.new(@singer) }, status: :ok
     else
-      render json: { error: 'Ошибка во время обновления группы' }, status: :bad_request
+      render_bad_request 'Ошибка во время обновления группы'
     end
   end
 
   def destroy
     @singer = Singer.find_by(id: params[:id])
     if @singer.update(lock: true)
-      render json: {}, status: :no_content
+      render_no_content
     else
-      render json: { error: 'Ошибка во время обновления группы' }, status: :bad_request
+      render_bad_request 'Ошибка во время обновления группы'
     end
   end
 

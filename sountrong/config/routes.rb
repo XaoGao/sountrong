@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       put 'edit_profile', to: 'registration#update'
 
       resources :singers, except: %w[new edit]
+      resources :albums, except: %w[new edit]
     end
   end
 end
