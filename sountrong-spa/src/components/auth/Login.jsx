@@ -8,7 +8,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import { NavLink } from "react-router-dom";
+import { NavLink, Redirect } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   margin: {
@@ -21,28 +21,29 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(5),
   },
   boxCenter: {
-    display: 'flex'
+    display: "flex",
   },
   decorationNavLink: {
-    textDecoration: 'none',
-    color: '#ffffff'
-  }
+    textDecoration: "none",
+    color: "#ffffff",
+  },
 }));
 
 export const Login = (props) => {
-  const[username, setUsername] = useState("");
-  const[password, setPassword] = useState("");
-
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   const classes = useStyles();
+
+  if (props.isAuth) {
+    return <Redirect to="/" />;
+  }
+  
   return (
-    <Box
-      margin='auto'
-      width={700}
-    >
+    <Box margin="auto" width={700}>
       <Card className={classes.marginTopForCard}>
         <CardContent>
           <form noValidate autoComplete="off">
-            <Typography variant="h4" align="center">         
+            <Typography variant="h4" align="center">
               Войти
             </Typography>
             <TextField
@@ -52,8 +53,8 @@ export const Login = (props) => {
               fullWidth={true}
               size="medium"
               className={`${classes.margin} ${classes.marginTopForField}`}
-              value = {username}
-              onChange = {e => setUsername(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
             />
             <TextField
               id="password-basic"
@@ -62,8 +63,8 @@ export const Login = (props) => {
               fullWidth={true}
               size="medium"
               className={classes.margin}
-              value = {password}
-              onChange = {e => setPassword(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </form>
           <hr />
@@ -74,13 +75,13 @@ export const Login = (props) => {
               color="primary"
               aria-label="large outlined primary button group"
             >
-              <Button
-                onClick = {() => props.login(username, password)}
-              >
+              <Button onClick={() => props.login(username, password)}>
                 Войти
               </Button>
               <Button>
-                <NavLink to={'/signup'} className={classes.decorationNavLink}>Зарегистрироваться</NavLink>
+                <NavLink to={"/signup"} className={classes.decorationNavLink}>
+                  Зарегистрироваться
+                </NavLink>
               </Button>
             </ButtonGroup>
           </Grid>

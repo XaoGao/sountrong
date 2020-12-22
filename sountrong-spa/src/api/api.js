@@ -23,3 +23,19 @@ export const authApi = {
       });
   },
 };
+export const singersApi = {
+  getSingers() {
+    return instanseWithoutToken()
+      .get("singers")
+      .then((response) => {
+        return response;
+      });
+  },
+  getSinger(id) {
+    return instanseWithoutToken()
+      .get(`singers/${id}`)
+      .then((response) => {
+        return response;
+      });
+  },
+};

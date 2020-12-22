@@ -1,10 +1,11 @@
 import { connect } from "react-redux";
-import { login } from '../../redux/auth-reducer'
+import { login } from "../../redux/auth-reducer";
 import Login from "./Login";
 
 let mapStateToProps = (state) => {
-  return {};
+  return {
+    isAuth: state.auth.isAuth,
+  };
 };
 
-
-export default connect(mapStateToProps, { login })(Login)
+export default connect(mapStateToProps, { login })(Login);

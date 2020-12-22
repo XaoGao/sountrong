@@ -2,9 +2,11 @@ import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import authReducer from "./auth-reducer";
 import appReducer from "./app-reducer";
 import thunkMiddleware from "redux-thunk";
+import singersReducer from "./singers-reducer";
 
 let reducers = combineReducers({
   auth: authReducer,
+  singers: singersReducer,
   app: appReducer,
 });
 
