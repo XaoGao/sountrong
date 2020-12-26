@@ -8,6 +8,7 @@ import Container from "@material-ui/core/Container";
 import LoginContainer from "./components/auth/LoginContainer";
 import SignupContainer from "./components/auth/SignupContainer";
 import Home from "./components/home/Home"
+import SingersContainer from "./components/singers/SingersContainer";
 
 export const App = (props) => {
   useEffect(() => {
@@ -18,6 +19,7 @@ export const App = (props) => {
       <NavbarContainer />
       <Container>
         <Route exact path="/" render={() => <Home />} />
+        <Route exact path="/singers" render={() => <SingersContainer />} />
         <Route exact path="/signup" render={() => <SignupContainer />} />
         <Route exact path="/login" render={() => <LoginContainer />} />
       </Container>
