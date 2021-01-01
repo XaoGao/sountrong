@@ -4,7 +4,7 @@ import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import UserMenu from "./UserMenu";
-import Typography from '@material-ui/core/Typography';
+import Typography from "@material-ui/core/Typography";
 import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +36,21 @@ export const Navbar = (props) => {
                 Sountrong
               </NavLink>
             </Typography>
-            <UserMenu isAuth={props.isAuth} username={props.username} logout={props.logout}/>
+            <Typography variant="h6" className={classes.title}>
+              <NavLink to={"/singers"} className={classes.decorationNavLink}>
+                Группы
+              </NavLink>
+            </Typography>
+            <Typography variant="h6" className={classes.title}>
+              <NavLink to={"/create-singer"} className={classes.decorationNavLink}>
+                Добавить группу
+              </NavLink>
+            </Typography>
+            <UserMenu
+              isAuth={props.isAuth}
+              username={props.username}
+              logout={props.logout}
+            />
           </Toolbar>
         </Container>
       </AppBar>

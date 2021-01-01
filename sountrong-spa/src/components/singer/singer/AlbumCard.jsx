@@ -4,37 +4,36 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import CardImage from "../shared/CardImage";
-import CardAction from "../shared/CardAction";
+import CardImage from "../../shared/CardImage";
+import CardAction from "../../shared/CardAction";
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
-    marginTop: 45,
   },
 });
 
-export const SingerCards = (props) => {
+export const AlbumCard = (props) => {
   const classes = useStyles();
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <CardImage height="300" title={props.singer.name} />
+        <CardImage height="140" title={props.album.title} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {props.singer.name}
+            {props.album.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {props.singer.description}
+            Жанр, язык,
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardAction
-        to={`/singers/${props.id}`}
-        count={props.singer.countOfAlbums}
-        title="альбомов"
+        to={`${props.singerId}/albums/${props.id}`}
+        count={props.album.countSong}
+        title="Песен"
       />
     </Card>
   );
 };
-export default SingerCards;
+export default AlbumCard;

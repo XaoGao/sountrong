@@ -21,3 +21,11 @@ require 'faker'
 #     password: 'password'
 #   )
 # end
+# 4.times do
+#   Singer.create(
+#     name: Faker::Music.band,
+#     description: Faker::Quote.famous_last_words,
+#     carier_start: Faker::Date.between(from: '1991-01-23', to: '2014-09-25')
+#   )
+# end
+

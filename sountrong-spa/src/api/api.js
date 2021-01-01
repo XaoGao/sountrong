@@ -38,4 +38,20 @@ export const singersApi = {
         return response;
       });
   },
+  createSinger(singerData) {
+    return instanse()
+      .post('singers', singerData)
+      .then((response) => {
+        return response;
+      })
+  }
 };
+export const albumsApi = {
+  getAlbum(albumId) {
+    return instanseWithoutToken()
+      .get(`albums/${albumId}`)
+      .then((response) => {
+        return response;
+      })
+  }
+}

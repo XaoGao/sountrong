@@ -3,10 +3,12 @@ import authReducer from "./auth-reducer";
 import appReducer from "./app-reducer";
 import thunkMiddleware from "redux-thunk";
 import singersReducer from "./singers-reducer";
+import albumReducer from "./album-reducer";
 
 let reducers = combineReducers({
   auth: authReducer,
   singers: singersReducer,
+  albums: albumReducer,
   app: appReducer,
 });
 
