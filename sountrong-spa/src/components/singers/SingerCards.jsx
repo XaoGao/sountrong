@@ -19,13 +19,10 @@ export const SingerCards = (props) => {
   return (
     <Card className={classes.root}>
       <CardActionArea>
-        <CardImage height="300" title={props.singer.name} />
+        <CardImage height="300" title={props.singer.name} image={props.singer.mainImage}/>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
             {props.singer.name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {props.singer.description}
           </Typography>
         </CardContent>
       </CardActionArea>

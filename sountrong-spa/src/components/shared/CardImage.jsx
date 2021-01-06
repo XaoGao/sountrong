@@ -8,7 +8,7 @@ export const CardImage = (props) => {
       component="img"
       alt={props.title}
       height={props.height}
-      image={nouser}
+      image={props.image ? `http://localhost:3001/${props.image}` : nouser}
       title={props.title}
     />
   );

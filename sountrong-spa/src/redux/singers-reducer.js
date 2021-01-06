@@ -6,7 +6,16 @@ const SET_FETCHING = "/singers/SET_FETCHING";
 
 const initState = {
   singers: [],
-  singer: null,
+  singer: {
+    id: 0,
+    name: "",
+    description: "",
+    carierStart: new Date(),
+    endOfCarier: null,
+    mainImage: "",
+    countOfAlbums: 0,
+    albums: [],
+  },
   isFetching: true,
 };
 
@@ -51,7 +60,21 @@ export const getSinger = (singerId) => async (dispatch) => {
   return await singersApi.getSinger(singerId).then((response) => {
     if (response.status === 200) {
       if (response.data.singer) {
-        dispatch(setSinger(response.data.singer.data));
+        const singer = response.data.singer.data;
+        const attr = singer.attributes;
+        debugger;
+        dispatch(
+          setSinger(
+            singer.id,
+            attr.name,
+            attr.description,
+            attr.carierStart,
+            attr.endOfCarier,
+            attr.mainImage,
+            attr.countOfAlbums,
+            attr.albums
+          )
+        );
       }
     }
     dispatch(setFetching(false));
@@ -78,14 +101,36 @@ export const createSinger = (singerData) => async (dispatch) => {
     });
 };
 
+export const purgeSinger = () => async (dispatch) => {
+  dispatch(setSinger(0, "", "", new Date(), null, "", 0, []));
+};
+
 export const setSingers = (singers) => ({
   type: SET_SINGERS_DATA,
   singers: singers,
 });
 
-export const setSinger = (singer) => ({
+export const setSinger = (
+  id,
+  name,
+  description,
+  carierStart,
+  endOfCarier,
+  mainImage,
+  countOfAlbums,
+  albums
+) => ({
   type: SET_SINGER_DATA,
-  singer: singer,
+  singer: {
+    id,
+    name,
+    description,
+    carierStart,
+    endOfCarier,
+    mainImage,
+    countOfAlbums,
+    albums,
+  },
 });
 
 export const setFetching = (isFetching) => ({

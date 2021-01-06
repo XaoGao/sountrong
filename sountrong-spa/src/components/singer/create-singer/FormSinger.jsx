@@ -9,7 +9,7 @@ import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
 import SaveIcon from "@material-ui/icons/Save";
-import DateFnsUtils from '@date-io/date-fns';
+import DateFnsUtils from "@date-io/date-fns";
 import { DatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 const useStyles = makeStyles((theme) => ({
@@ -34,11 +34,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const CreateSinger = (props) => {
-  const [name, setName] = useState("Битлс");
-  const [description, setDescription] = useState("Известная группа из ливерпуля");
-  const [carierStart, setCarierStart] = useState(new Date());
-  const [endOfCarier, setEndOfCarier] = useState(null);
+export const FormSinger = (props) => {
+  const [name, setName] = useState(props.singer.name);
+  const [description, setDescription] = useState(props.singer.description);
+  const [carierStart, setCarierStart] = useState(props.singer.carierStart);
+  const [endOfCarier, setEndOfCarier] = useState(props.singer.endOfCarier);
+  const [mainImage, setMainImage] = useState(props.singer.mainImage);
 
   const classes = useStyles();
   return (
@@ -67,7 +68,7 @@ export const CreateSinger = (props) => {
           />
           <Grid container spacing={3}>
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <Grid item xs={6}>
+              <Grid item xs={4}>
                 <DatePicker
                   views={["year"]}
                   label="Начало карьеры"
@@ -76,7 +77,7 @@ export const CreateSinger = (props) => {
                   animateYearScrolling
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={4}>
                 <DatePicker
                   views={["year"]}
                   label="Конец карьеры"
@@ -86,6 +87,13 @@ export const CreateSinger = (props) => {
                 />
               </Grid>
             </MuiPickersUtilsProvider>
+            <Grid item xs={4}>
+              <TextField
+                type="file"
+                variant="outlined"
+                onChange={(e) => setMainImage(e.target.files[0])}
+              />
+            </Grid>
           </Grid>
         </FormControl>
       </CardContent>
@@ -96,7 +104,13 @@ export const CreateSinger = (props) => {
           color="primary"
           startIcon={<SaveIcon />}
           onClick={() =>
-            props.submit({ name, description, carierStart, endOfCarier })
+            props.submit({
+              name,
+              description,
+              carierStart,
+              endOfCarier,
+              mainImage,
+            })
           }
         >
           Добавить
@@ -105,4 +119,4 @@ export const CreateSinger = (props) => {
     </Card>
   );
 };
-export default CreateSinger;
+export default FormSinger;

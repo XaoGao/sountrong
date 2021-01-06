@@ -6,6 +6,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import UserMenu from "./UserMenu";
 import Typography from "@material-ui/core/Typography";
 import { NavLink } from "react-router-dom";
+import { role } from '../../settings/roles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,11 +42,19 @@ export const Navbar = (props) => {
                 Группы
               </NavLink>
             </Typography>
-            <Typography variant="h6" className={classes.title}>
-              <NavLink to={"/create-singer"} className={classes.decorationNavLink}>
-                Добавить группу
-              </NavLink>
-            </Typography>
+            {props.isAuth && role.canEdit(props.role) ? (
+              <Typography variant="h6" className={classes.title}>
+                <NavLink
+                  to={"/create-singer"}
+                  className={classes.decorationNavLink}
+                >
+                  Добавить группу
+                </NavLink>
+              </Typography>
+            ) : (
+              ""
+            )}
+
             <UserMenu
               isAuth={props.isAuth}
               username={props.username}

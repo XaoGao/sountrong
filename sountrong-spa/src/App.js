@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import "./App.css";
 import NavbarContainer from "./components/navbar/NavbarContainer";
 import { Routes } from "./components/untils/Routes";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const App = (props) => {
   useEffect(() => {
@@ -14,6 +15,7 @@ export const App = (props) => {
     <div className="App">
       <NavbarContainer />
       <Routes/>
+      <ToastContainer />
     </div>
   );
 };

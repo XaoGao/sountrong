@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 export const PaperTypograhy = (props) => {
   return (
     <Paper className={props.classes.paper}>
-      <Typography variant={props.variant} align="center">
+      <Typography variant={props.variant} align="center" onClick={props.handler}>
         {props.body}
       </Typography>
     </Paper>

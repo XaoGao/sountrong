@@ -5,7 +5,7 @@ class Api::V1::SingersController < Api::BaseController
   before_action :authorized, only: %w[create update destroy]
 
   def index
-    @singers = Singer.all_active
+    @singers = Singer.all_active.with_attached_main_image
     render json: { singers: SingersSerializer.new(@singers) }, status: :ok
   end
 
@@ -48,6 +48,6 @@ class Api::V1::SingersController < Api::BaseController
   private
 
   def singer_params
-    params.require(:singer).permit(:name, :description, :carier_start, :end_of_carier, :main_image)
+    params.permit(:name, :description, :carier_start, :end_of_carier, :main_image)
   end
 end

@@ -26,6 +26,7 @@ const SingerContainer = (props) => {
 let mapPropsToState = (state) => {
   return {
     singer: state.singers.singer,
+    role: state.auth.role,
     isFetching: state.singers.isFetching,
   };
 };
