@@ -31,20 +31,27 @@ export const singersApi = {
         return response;
       });
   },
-  getSinger(id) {
+  getSinger(singerId) {
     return instanseWithoutToken()
-      .get(`singers/${id}`)
+      .get(`singers/${singerId}`)
       .then((response) => {
         return response;
       });
   },
   createSinger(singerData) {
     return instanse()
-      .post('singers', singerData)
+      .post("singers", singerData)
       .then((response) => {
         return response;
-      })
-  }
+      });
+  },
+  updateSinger(singerId, singerData) {
+    return instanse()
+      .put(`singers/${singerId}`, singerData)
+      .then((response) => {
+        return response;
+      });
+  },
 };
 export const albumsApi = {
   getAlbum(albumId) {
@@ -52,6 +59,20 @@ export const albumsApi = {
       .get(`albums/${albumId}`)
       .then((response) => {
         return response;
+      });
+  },
+  updateAlbum(albumId, formData) {
+    return instanse()
+      .put(`albums/${albumId}`, formData)
+      .then((response) => {
+        return response;
+      });
+  },
+  createAlbum(formData) {
+    return instanse()
+      .post(`albums`, formData)
+      .then((response) => {
+        return response;
       })
   }
-}
+};

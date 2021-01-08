@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import AlbumCard from "./AlbumCard";
@@ -19,18 +19,9 @@ const useStyles = makeStyles((theme) => ({
 export const Singer = (props) => {
   const classes = useStyles();
   
-  let title = () => {
-    let t = props.singer.name;
-    if (role.canEdit(props.role)) {
-      t += " [Редактировать]";
-    }
-    return t;
-  }
-
-  
   let albums = null;
   
-  if (props.singer.albums) {
+  if (props.singer.albums && props.singer.albums.data) {
     let data = Array.from(props.singer.albums.data);
     albums = data.map((album) => (
       <Grid key={album.id} item xs={3}>
@@ -46,7 +37,7 @@ export const Singer = (props) => {
     <Grid container spacing={3}>
       <Grid item xs={12}>
         <PaperTypograhy
-          body={title()}
+          body={props.singer.name}
           classes={classes}
           variant="h3"
         />

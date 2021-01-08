@@ -113,7 +113,7 @@ export const FormSinger = (props) => {
             })
           }
         >
-          Добавить
+          {props.singer.id ? "Обновить" : "Добавить"}
         </Button>
       </CardActions>
     </Card>

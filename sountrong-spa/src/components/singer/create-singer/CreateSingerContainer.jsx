@@ -14,7 +14,6 @@ export const CreateSingerContainer = (props) => {
 
 
   let submit = (formData) => {
-    
     const fd = new FormData();
     fd.append('mainImage', formData.mainImage);
     fd.append('description', formData.description);

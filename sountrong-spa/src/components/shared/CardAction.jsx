@@ -11,6 +11,15 @@ export const CardAction = (props) => {
           {props.count} {props.title}
         </NavLink>
       </Button>
+      {props.toEdit ? (
+        <Button color="primary">
+          <NavLink to={props.toEdit}>
+            Редактировать
+          </NavLink>
+        </Button>
+      ) : (
+        <></>
+      )}
     </CardActions>
   );
 };

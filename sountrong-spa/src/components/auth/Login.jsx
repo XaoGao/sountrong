@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export const Login = (props) => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("xaogao");
+  const [password, setPassword] = useState("password");
   const classes = useStyles();
 
   if (props.isAuth) {

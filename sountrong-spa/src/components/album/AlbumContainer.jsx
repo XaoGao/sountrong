@@ -1,18 +1,32 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
+import Album from "./show/Album";
+import { getAlbum } from "../../redux/album-reducer";
 
-export const AlbumContainer = () => {
+const AlbumContainer = (props) => {
+  useEffect(() => {
+    let albumId = props.match.params.albumId;
+    if (albumId) {
+      props.getAlbum(albumId);
+    }
+  }, []);
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <>
+      <Album album={props.album} />
+    </>
+  );
+};
 
 let mapStateToProps = (state) => {
   return {
-    // album: 
-  }
-}
+    album: state.albums.album,
+    isFetching: state.albums.isFetching,
+  };
+};
 
-export default connect(mapStateToProps,{})(AlbumContainer)
+export default compose(
+  connect(mapStateToProps, { getAlbum }),
+  withRouter
+)(AlbumContainer);

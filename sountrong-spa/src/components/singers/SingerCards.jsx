@@ -30,6 +30,7 @@ export const SingerCards = (props) => {
         to={`/singers/${props.id}`}
         count={props.singer.countOfAlbums}
         title="альбомов"
+        toEdit={`/edit-singers/${props.id}`}
       />
     </Card>
   );

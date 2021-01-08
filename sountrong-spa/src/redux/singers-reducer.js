@@ -45,40 +45,47 @@ export default singersReducer;
 
 export const getSingers = () => async (dispatch) => {
   dispatch(setFetching(true));
-  return await singersApi.getSingers().then((response) => {
-    if (response.status === 200) {
-      if (response.data.singers) {
-        dispatch(setSingers(response.data.singers.data));
+  return await singersApi
+    .getSingers()
+    .then((response) => {
+      if (response.status === 200) {
+        if (response.data.singers) {
+          dispatch(setSingers(response.data.singers.data));
+        }
       }
-    }
-    dispatch(setFetching(false));
-  });
+    })
+    .finally(() => {
+      dispatch(setFetching(false));
+    });
 };
 
 export const getSinger = (singerId) => async (dispatch) => {
   dispatch(setFetching(true));
-  return await singersApi.getSinger(singerId).then((response) => {
-    if (response.status === 200) {
-      if (response.data.singer) {
-        const singer = response.data.singer.data;
-        const attr = singer.attributes;
-        debugger;
-        dispatch(
-          setSinger(
-            singer.id,
-            attr.name,
-            attr.description,
-            attr.carierStart,
-            attr.endOfCarier,
-            attr.mainImage,
-            attr.countOfAlbums,
-            attr.albums
-          )
-        );
+  return await singersApi
+    .getSinger(singerId)
+    .then((response) => {
+      if (response.status === 200) {
+        if (response.data.singer) {
+          const singer = response.data.singer.data;
+          const attr = singer.attributes;
+          dispatch(
+            setSinger(
+              singer.id,
+              attr.name,
+              attr.description,
+              attr.carierStart,
+              attr.endOfCarier,
+              attr.mainImage,
+              attr.countOfAlbums,
+              attr.albums
+            )
+          );
+        }
       }
-    }
-    dispatch(setFetching(false));
-  });
+    })
+    .finally(() => {
+      dispatch(setFetching(false));
+    });
 };
 
 export const createSinger = (singerData) => async (dispatch) => {
@@ -103,6 +110,26 @@ export const createSinger = (singerData) => async (dispatch) => {
 
 export const purgeSinger = () => async (dispatch) => {
   dispatch(setSinger(0, "", "", new Date(), null, "", 0, []));
+};
+
+export const updateSinger = (id, singerData) => async (dispatch) => {
+  dispatch(setFetching(true));
+  return await singersApi
+    .updateSinger(id, singerData)
+    .then((response) => {
+      if (response.status === 200) {
+        return response;
+      }
+    })
+    .catch((error) => {
+      let er = error.response.data.error
+        ? error.response.data.error
+        : "Непредвиденная ошибка";
+      throw Error(er);
+    })
+    .finally(() => {
+      dispatch(setFetching(false));
+    });
 };
 
 export const setSingers = (singers) => ({
