@@ -26,7 +26,7 @@ class Api::V1::AlbumsController < Api::BaseController
   def show
     @album = Album.find_by(id: params[:id])
     if @album.present?
-      render json: { album: AlbumControllerTest.new(@album) }, status: :ok
+      render json: { album: AlbumSerializer.new(@album) }, status: :ok
     else
       render_bad_request 'Не найден альбом по идентификатору'
     end
@@ -35,6 +35,6 @@ class Api::V1::AlbumsController < Api::BaseController
   def destroy; end
 
   def album_params
-    params.require(:album).permit(:title, :description, :year_of_issue, :language, :country, :record_label)
+    params.permit(:title, :description, :year_of_issue, :language, :country, :record_label)
   end
 end

@@ -29,10 +29,11 @@ class Api::V1::SingersController < Api::BaseController
 
   def update
     @singer = Singer.find_by(id: params[:id])
+    # TODO: create photo model
     if @singer.update singer_params
       render json: { singer: SingerSerializer.new(@singer) }, status: :ok
     else
-      render_bad_request 'Ошибка во время обновления группы'
+      render_bad_request "Ошибка во время обновления группы; #{@singer.errors}"
     end
   end
 
